@@ -5,12 +5,12 @@ import {Server} from 'socket.io';
 
 import mongoose from 'mongoose';
 import cors from 'cors';
-
+import dotenv from 'dotenv';
 
 import connectToSocket from './controllers/socketManager.js';
 
 import userRoutes from './routes/users.routes.js';
-
+dotenv.config();
 
 const app = express();
 app.use(express.json());
@@ -32,7 +32,7 @@ app.use(express.urlencoded({limit:"40kb",extended:true}));
 const start=async()=>{
     app.set("mongo_user")
 
-    const connectionDb=await mongoose.connect("mongodb+srv://prajwalghurde320:gci0QPwScofk0uwX@cluster0.myhrzxk.mongodb.net/");
+    const connectionDb=await mongoose.connect("process.env.MONGODB_URL");
 
     console.log(`Connected to MongoDB: ${connectionDb.connection.host}`);
 
